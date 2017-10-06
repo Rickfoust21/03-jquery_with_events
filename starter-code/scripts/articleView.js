@@ -41,16 +41,16 @@ articleView.handleAuthorFilter = function() {
       //       and then show just the ones that match for the author that was selected.
       //       Use an "attribute selector" to find those articles, and fade them in for the reader.
           $('article').hide();
-          $('article[data-author="' + $(this).val() + '"]').fadeIn();
+          $('article[data-author="'$(this).val() + '"]').fadeIn();
     } else {
       // TODO: If the select box was changed to an option that is blank, we should
       //       show all the articles, except the one article we are using as a template.
-      $article.fadeIn();
-      $('article.template').hide();
+      $('article').not('.template').show()
     }
     $('#category-filter').val('');
   });
 };
+
 
 articleView.handleCategoryFilter = function() {
   // TODO: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
@@ -61,14 +61,15 @@ $('#category-filter').on('change', function(){
     if ($(this).val()) {
       $('article').hide();
       $('article[data-category="' + $(this).val() + '"]').fadeIn();
-    }
-    else {
-      $('article').fadeIn();
-      $('article.template').hide();
-    }
-    $('#author-filter').val('');
-})
-};
+           }
+           else {
+            $('article').not('.template').show()
+          }
+
+          $('#author-filter').val('');
+        });
+
+      };
 
 articleView.handleMainNav = function() {
   // TODO: Add an event handler to .main-nav elements that will power the Tabs feature.
@@ -117,5 +118,5 @@ $(document).ready(function() {
   articleView.handleAuthorFilter();
   articleView.handleMainNav();
   articleView.setTeasers();
-  
+
 })
